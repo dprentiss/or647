@@ -13,18 +13,13 @@ team acquires 7 new players per year in the draft. The number of active
 players on each team must always be 67. Thus, each team must cut some
 existing players each year to make room for the new players.
 
-(a) Assuming that a football player can only join a team by being selected
+\subsection*{a}
+Assuming that a football player can only join a team by being selected
 in the draft, estimate the average career length of a football player in
 the league.
 
-(b) Now, suppose that a player can join a team in one of two ways: (1) by
-being selected in the draft, as before, or (2) by signing directly with a
-team outside the draft. Suppose further that the average career length of
-a football player is known to be 3.5 years. Under the same assumptions
-as before, estimate the average number of players who enter the league
-each year without being drafted.
 
-\subsection*{Solution}
+\subsubsection*{Solution}
 
 From Little's Law, we know that $L=\lambda W$, where $L$ is the average number
 of customers in the system, $\lambda$ is the average rate that customers arrive
@@ -49,15 +44,21 @@ $\lambda = 7 \text{ players/year}\times 32 \text{ teams}$
   {7 \text{ players/year}\times \cancel{32 \text{ teams}}} \approx 9.6 \text{ years}.
 \end{equation}
 
+\subsection*{b}
+Now, suppose that a player can join a team in one of two ways: (1) by
+being selected in the draft, as before, or (2) by signing directly with a
+team outside the draft. Suppose further that the average career length of
+a football player is known to be 3.5 years. Under the same assumptions
+as before, estimate the average number of players who enter the league
+each year without being drafted.
+\subsubsection*{Solution}
 For part (b), we are given $W = 3.5 \text{ years}$. Additionally, the average
 number of players joining a team each year is the sum of the seven players
 drafted plus the average number of players signing on outside of the draft,
-$\lambda_d$, giving $\lambda = 7+\lambda_d$.
-
-Solving again, this time for $\lambda_d$, we have
+$\lambda_d$, giving $\lambda = 7+\lambda_d$. Solving again, this time for $\lambda_d$, we have
 \begin{align}
   L &= \lambda W \\
-    &= (7 + \lambda_d) W \\
+  L &= (7 + \lambda_d) W \\
   \lambda_d &= \frac{L}{W}-7 = \frac{67 \text{ players}}{3.5 \text{ years}}
               - 7\text{ players/year}\approx 12.1\text{ players/year}.
 \end{align}
@@ -67,17 +68,38 @@ The length of time that a person owns a car before buying a new one has an Erlan
 distribution with a mean of 5 years. Suppose that there are approximately 150 million
 cars in the United States.
 
-a. Assuming that a person's old car is destroyed when he or she buys a new car,
+\subsection*{a}
+Assuming that a person's old car is destroyed when he or she buys a new car,
 how many cars does the auto industry expect to sell each year?
-
-b. Now assume that a person's old car is sold to somebody else when that person
+\subsubsection*{Solution}
+Applying Little's Law, let the system be the pool of cars in the United States
+with the average number of cars in the system, $L=1.5\times10^8\text{ cars}$, and the
+average time spent in the system, $W=5 \text{ years}$. Then, solving for the
+average rate of cars entering the the system, $\lambda$, we have
+\begin{align}
+  L &= \lambda W \\
+  \lambda &= \frac{L}{W} = \frac{1.5\times10^8\text{ cars}}{5 \text{ years}} = 3\times10^8\text{ cars/year}
+\end{align}
+\subsection*{b}
+Now assume that a person's old car is sold to somebody else when that person
 buys a new car. The person who buys the used car keeps it for period of time
 following an Erlang-3 distribution with a mean of 7 years. When that person buys
 another used car, his or her previous used car is assumed to be destroyed. Under
 the same previous assumptions, how many new cars does the auto industry
 expect to sell each year?
-
-\subsection*{Solution}
+\subsubsection*{Solution}
+Let $L=1.5\times10^8\text{ cars}$ as before. For cars purchased new, we know
+that the average time of ownership, $W_n = 5 \text{ years}$, and for those purchased
+used, $W_u = 7 \text{ years}$. Since these times are expected values, we know
+that the average time a car spends on the road in total is
+\begin{equation}
+  W = W_n+W_u=13\text{ years}.
+\end{equation}
+So then,
+\begin{equation}
+  \lambda = \frac{L}{W} = \frac{1.5\times10^8\text{ cars}}{13 \text{ years}}
+  = 1.154\times10^7\text{ cars/year}
+\end{equation}
 
 \section{} %3
 A graduate program in systems engineering has full time students and part time students.
@@ -87,12 +109,29 @@ year is a Poisson random variable with a mean of 20. 30\% of full-time students 
 in 1.5 years and 70\% graduate in 2 years. 50\% of part-time students graduate in 3 years
 and 50\% graduate in 4 years.
 
-a. What is the average number of students enrolled in the program?
+\subsection*{a}
+What is the average number of students enrolled in the program?
+\begin{align}
+\lambda &= 20 + 30 = 50\text{ students/year}\\
+  W &=\frac{0.3(1.5) + 0.7(2) + 0.5(3) + 0.5(4)}{0.3 + 0.7 + 0.5 + 0.5} \text{ (years)}
+     = 2.675 \text{ years} \\
+  L &= 50\text{ students/year} \times 2.675 \text{ years} = 133.8\text{ students}
+\end{align}
+\subsubsection*{Solution}
 
-b. On average, at a given moment in time, what fraction of enrolled students are
+\subsection*{b}
+On average, at a given moment in time, what fraction of enrolled students are
 full-time and what fraction are part-time?
 
-\subsection*{Solution}
+\subsubsection*{Solution}
+\begin{align}
+\lambda_f &= 30\text{ students/year}\\
+  W_f &=0.5(3) + 0.5(4)\text{ (years)}
+     = 3.5 \text{ years} \\
+  L_f &= 30\text{ students/year} \times 3.5 \text{ years} = 105\text{ students}\\
+  P_f &= \frac{L_f}{L}=\frac{105}{133.8} = 0.785\\
+  P_p &= \frac{L-L_f}{L}=\frac{133.8-105}{133.8} = 0.215
+\end{align}
 
 \section{} %4
 Customers who have purchased a Delta laptop may call a customer support center to get
@@ -109,9 +148,7 @@ assumptions you make to answer this question.
 
 b. What is the average time spent in the system for a customer who needs to talk to
 a specialist?
-
-\subsection*{Solution}
-
+\subsubsection*{Solution}
 \section{} %5
 Someone is using a hovering drone to take aerial pictures in a park. If the drone fails
 (e.g., a rotor breaks), it might fall anywhere in a circle of some radius (see top view in
@@ -124,15 +161,11 @@ a. What is the average number of people at risk to a potential drone failure at 
 time (i.e., what is the average number of people in the circle at any point in time)?
 b. Now suppose that 20\% of all people stop at the intersection for 3 minutes to read a
 sign before continuing. What is the average number of people exposed in this case?
-
-\subsection*{Solution}
-
+\subsubsection*{Solution}
 \section{} %6
 Is it better to split service into separate tasks (a tandem queueing system, like Starbucks
 with a cashier and barista) or have each server complete all service tasks (e.g., have 2
 servers that do both jobs)? Identify strengths and weaknesses for each option (using
 common sense arguments, no math).
-
-\subsection*{Solution}
-
+\subsubsection*{Solution}
 \end{document}
