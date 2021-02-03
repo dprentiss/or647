@@ -143,12 +143,28 @@ there are 10 customers being served or waiting to be served by a specialist. The
 rate of incoming calls is 100 per hour. There are 30 regular representatives and 10
 specialists.
 
-a. What is the average time spent in the system for an arbitrary customer? State any
+\subsection*{a}
+What is the average time spent in the system for an arbitrary customer? State any
 assumptions you make to answer this question.
-
-b. What is the average time spent in the system for a customer who needs to talk to
+\subsubsection*{Solution}
+\begin{align}
+  \lambda &= 100\text{ customers/hour}\\
+  L &= L_r + L_s = 40\text{ customers}+10\text{ customers}=50\text{ customers} \\
+  W &= \frac{L}{\lambda} =\frac{50\text{ customers}}{100\text{ customers/hour}}=0.5\text{ hours}
+\end{align}
+\subsection*{b}
+What is the average time spent in the system for a customer who needs to talk to
 a specialist?
 \subsubsection*{Solution}
+\begin{align}
+  L_r &= 40\text{ customers} \\
+  \lambda_r &= \lambda = 100 \text{ customers/hour}\\
+  W_r &= \frac{L_r}{\lambda_r} =\frac{40\text{ customers}}{100\text{ customers/hour}}
+        =0.4\text{ hours} \\
+  W &= \frac{0.2W_s + W_r}{0.2+1} \\
+  W_s &= \frac{1.2W-W_r}{0.2} = \frac{1.2(0.5)-0.4}{0.2} = 1\text{ hour}
+\end{align}
+
 \section{} %5
 Someone is using a hovering drone to take aerial pictures in a park. If the drone fails
 (e.g., a rotor breaks), it might fall anywhere in a circle of some radius (see top view in
@@ -157,11 +173,28 @@ drone falls. The drone is hovering near several paths. People enter each of the 
 points on the circle according to a Poisson process with rate 1 every 5 minutes. Each
 person walks at a rate of 1.1 m/s. The path segment lengths are shown in the figure. At
 the intersection, each person is equally likely to continue on either of the other two paths.
-a. What is the average number of people at risk to a potential drone failure at any given
+
+\subsection*{a}
+What is the average number of people at risk to a potential drone failure at any given
 time (i.e., what is the average number of people in the circle at any point in time)?
-b. Now suppose that 20\% of all people stop at the intersection for 3 minutes to read a
+\subsubsection*{Solution}
+Within the risk area, there are three paths (two directions each) with an equal
+traveler arrival rate of one every five minutes. The total traveler arrival rate
+is three every five minutes (0.6 travelers/minute). The paths have lengths of 1,200 m, 1500
+m, and 1700 m. The average distance is 1,466.67 m. At a walking speed of 1.1 m/s
+the average is 22.22 min.
+
+
+
+
+
+
+
+\subsection*{b}
+Now suppose that 20\% of all people stop at the intersection for 3 minutes to read a
 sign before continuing. What is the average number of people exposed in this case?
 \subsubsection*{Solution}
+
 \section{} %6
 Is it better to split service into separate tasks (a tandem queueing system, like Starbucks
 with a cashier and barista) or have each server complete all service tasks (e.g., have 2
