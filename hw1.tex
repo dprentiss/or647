@@ -1,8 +1,9 @@
-\documentclass{amsart}
+\documentclass[letterpaper]{amsart}
 \usepackage{cancel}
-\title{Homework 1}
+\title[Homework 1]{Homework 1 \\ OR647: Queueing Theory, Spring 2021}
 \author{David Prentiss}
-
+\email{dprentis@gmu.edu}
+\date{\today}
 \begin{document}
 \maketitle
 
@@ -25,7 +26,7 @@ From Little's Law, we know that $L=\lambda W$, where $L$ is the average number
 of customers in the system, $\lambda$ is the average rate that customers arrive
 to a system, and $W$ is the average time that a customer spends in the system.
 
-For part (a), let the system be a single team. Since the number of active
+Let the system be a single team. Since the number of active
 players per team must be 67, then let $\L = 67 \text{ players}$. Furthermore, since seven
 new players are drafted each year, let $\lambda = 7 \text{ players/year}$.
 
@@ -52,7 +53,7 @@ a football player is known to be 3.5 years. Under the same assumptions
 as before, estimate the average number of players who enter the league
 each year without being drafted.
 \subsubsection*{Solution}
-For part (b), we are given $W = 3.5 \text{ years}$. Additionally, the average
+We are given $W = 3.5 \text{ years}$. Additionally, the average
 number of players joining a team each year is the sum of the seven players
 drafted plus the average number of players signing on outside of the draft,
 $\lambda_d$, giving $\lambda = 7+\lambda_d$. Solving again, this time for $\lambda_d$, we have
@@ -98,7 +99,7 @@ that the average time a car spends on the road in total is
 So then,
 \begin{equation}
   \lambda = \frac{L}{W} = \frac{1.5\times10^8\text{ cars}}{13 \text{ years}}
-  = 1.154\times10^7\text{ cars/year}
+  \approx 1.154\times10^7\text{ cars/year}
 \end{equation}
 
 \section{} %3
@@ -111,33 +112,51 @@ and 50\% graduate in 4 years.
 
 \subsection*{a}
 What is the average number of students enrolled in the program?
-\begin{align}
-\lambda &= 20 + 30 = 50\text{ students/year}\\
-  W &=\frac{0.3(1.5) + 0.7(2) + 0.5(3) + 0.5(4)}{0.3 + 0.7 + 0.5 + 0.5} \text{ (years)}
-     = 2.675 \text{ years} \\
-  L &= 50\text{ students/year} \times 2.675 \text{ years} = 133.8\text{ students}
-\end{align}
 \subsubsection*{Solution}
+With $L$, $\lambda$, and $W$ as before, apply Little's Law with
+\begin{equation}
+  \lambda = 20 + 30 = 50\text{ students/year}
+\end{equation}
+and
+\begin{equation}
+  W =\frac{0.3(1.5) + 0.7(2) + 0.5(3) + 0.5(4)}{0.3 + 0.7 + 0.5 + 0.5} \text{ (years)}
+     \approx 2.675 \text{ years}.
+\end{equation}
+Then
+\begin{equation}
+  L = \lambda W = 50\text{ students/year} \times 2.675 \text{ years} \approx 133.8\text{ students}
+\end{equation}
 
 \subsection*{b}
 On average, at a given moment in time, what fraction of enrolled students are
 full-time and what fraction are part-time?
 
 \subsubsection*{Solution}
-\begin{align}
-\lambda_f &= 30\text{ students/year}\\
-  W_f &=0.5(3) + 0.5(4)\text{ (years)}
-     = 3.5 \text{ years} \\
-  L_f &= 30\text{ students/year} \times 3.5 \text{ years} = 105\text{ students}\\
-  P_f &= \frac{L_f}{L}=\frac{105}{133.8} = 0.785\\
-  P_p &= \frac{L-L_f}{L}=\frac{133.8-105}{133.8} = 0.215
-\end{align}
+Since we know the arrival rate, $\lambda_f$, and can calculate the length of program, $W_f$, for
+full-time students, we apply Little's law with
+\begin{equation}
+\lambda_f = 30\text{ students/year}
+\end{equation}
+and
+\begin{equation}
+  W_f =0.5(3) + 0.5(4)\text{ (years)}
+     = 3.5 \text{ years}.
+\end{equation}
+Then
+\begin{equation}
+  L_f = 30\text{ students/year} \times 3.5 \text{ years} = 105\text{ students}
+\end{equation}
+So the proportion of full-time students is
+\begin{equation}
+  \frac{L_f}{L}=\frac{105}{133.8} \approx 0.785
+\end{equation}
+and the proportion of part-time students is
+\begin{equation}
+  P_p = \frac{L-L_f}{L}=\frac{133.8-105}{133.8} \approx 0.215
+\end{equation}
 
 \section{} %4
-Customers who have purchased a Delta laptop may call a customer support center to get
-technical help. Initially, a call is handled by a regular service representative. If the
-problem cannot be handled by a regular service representative, the call is transferred to a
-specialist. 20\% of all calls are transferred to a specialist. On average, there are 40
+Customers who have purchased a Delta laptop may call a customer support center to get technical help. Initially, a call is handled by a regular service representative. If the problem cannot be handled by a regular service representative, the call is transferred to a specialist. 20\% of all calls are transferred to a specialist. On average, there are 40
 customers being served or waiting to be served by a regular representative. On average,
 there are 10 customers being served or waiting to be served by a specialist. The average
 rate of incoming calls is 100 per hour. There are 30 regular representatives and 10
@@ -147,23 +166,47 @@ specialists.
 What is the average time spent in the system for an arbitrary customer? State any
 assumptions you make to answer this question.
 \subsubsection*{Solution}
-\begin{align}
-  \lambda &= 100\text{ customers/hour}\\
-  L &= L_r + L_s = 40\text{ customers}+10\text{ customers}=50\text{ customers} \\
-  W &= \frac{L}{\lambda} =\frac{50\text{ customers}}{100\text{ customers/hour}}=0.5\text{ hours}
-\end{align}
+We can use the average number, $L_r$, of regular customers and, $L_s$ the number of those
+customers needing a specialist to apply Little's Law with $\lambda$ and $W$ as before.
+\begin{equation}
+  \lambda = 100\text{ customers/hour}
+\end{equation}
+and
+\begin{equation}
+  L = L_r + L_s = 40\text{ customers}+10\text{ customers}=50\text{ customers},
+\end{equation}
+so
+\begin{equation}
+  W = \frac{L}{\lambda} =\frac{50\text{ customers}}{100\text{ customers/hour}}=0.5\text{ hours}
+\end{equation}
 \subsection*{b}
 What is the average time spent in the system for a customer who needs to talk to
 a specialist?
 \subsubsection*{Solution}
-\begin{align}
-  L_r &= 40\text{ customers} \\
-  \lambda_r &= \lambda = 100 \text{ customers/hour}\\
-  W_r &= \frac{L_r}{\lambda_r} =\frac{40\text{ customers}}{100\text{ customers/hour}}
-        =0.4\text{ hours} \\
-  W &= \frac{0.2W_s + W_r}{0.2+1} \\
-  W_s &= \frac{1.2W-W_r}{0.2} = \frac{1.2(0.5)-0.4}{0.2} = 1\text{ hour}
-\end{align}
+Since all customers are, at least initially, regular customers, we can
+use $\lambda$ to calculate $W_r$, the average time regular customers are on the
+line. Then, $W_r$ and $W$ may be used to find $W_s$, the average time customers
+that require a specialist are on the line. We know that
+\begin{equation}
+  L_r = 40\text{ customers}
+\end{equation}
+and
+\begin{equation}
+  \lambda_r = \lambda = 100 \text{ customers/hour}.
+\end{equation}
+Then from Little's law, it follows that
+\begin{equation}
+  W_r= \frac{L_r}{\lambda_r} =\frac{40\text{ customers}}{100\text{ customers/hour}}
+        =0.4\text{ hours}.
+\end{equation}
+Since
+\begin{equation}
+  W = \frac{0.2W_s + W_r}{0.2+1},
+\end{equation}
+we can solve for $W_s$ to find
+\begin{equation}
+  W_s = \frac{1.2W-W_r}{0.2} = \frac{1.2(0.5)-0.4}{0.2} = 1\text{ hour}.
+\end{equation}
 
 \section{} %5
 Someone is using a hovering drone to take aerial pictures in a park. If the drone fails
@@ -179,21 +222,31 @@ What is the average number of people at risk to a potential drone failure at any
 time (i.e., what is the average number of people in the circle at any point in time)?
 \subsubsection*{Solution}
 Within the risk area, there are three paths (two directions each) with an equal
-traveler arrival rate of one every five minutes. The total traveler arrival rate
-is three every five minutes (0.6 travelers/minute). The paths have lengths of 1,200 m, 1500
-m, and 1700 m. The average distance is 1,466.67 m. At a walking speed of 1.1 m/s
-the average is 22.22 min.
-
-
-
-
-
-
+traveler arrival rate of one every five minutes. The total traveler arrival
+rate, $\lambda$, is three every five minutes (0.6 travelers/min). The paths
+have lengths of 1,200 m, 1500 m, and 1700 m. The average distance is 1,466.67 m.
+At a walking speed of 1.1 m/s the average time,$W$, in the risk area is 22.22 min.
+The average number of travelers at risk, $L$, is
+\begin{align}
+  L &= \lambda W \\
+    &= 0.6\text{ travelers/min} \times 22.22\text{ min}\approx13.33\text{ travelers}.
+\end{align}
 
 \subsection*{b}
 Now suppose that 20\% of all people stop at the intersection for 3 minutes to read a
 sign before continuing. What is the average number of people exposed in this case?
 \subsubsection*{Solution}
+Since some travelers (20\%) spend more time at the intersection, the new average time
+spent, $W^\prime$, in the risk area is
+\begin{equation}
+  W^\prime = W + 0.2 \times 3\text{ min} = 22.22\text{ min} + 0.2 \times 3\text{ min}
+  = 22.82\text{ min}.
+\end{equation}
+So the new number of exposed travelers, $L^\prime$, is
+\begin{align}
+  L^\prime &= \lambda W^\prime \\
+    &= 0.6\text{ travelers/min} \times 22.82\text{ min}\approx13.69\text{ travelers}.
+\end{align}
 
 \section{} %6
 Is it better to split service into separate tasks (a tandem queueing system, like Starbucks
@@ -201,4 +254,38 @@ with a cashier and barista) or have each server complete all service tasks (e.g.
 servers that do both jobs)? Identify strengths and weaknesses for each option (using
 common sense arguments, no math).
 \subsubsection*{Solution}
+In the Starbucks retail example, we can assume that operations have been
+designed to maximize customer throughput while meeting certain threshold
+requirements for queue experience quality such as a maximum expected initial wait time limit.
+
+Services often comprise both personnel and mechanisms. In the Starbucks example,
+different mechanisms are required for their respective roles such as the cash
+register, espresso machine, and blender. Since these devices represent their own
+services with customers, service times, and queues, it may be best to match
+personnel with mechanisms such that high demand for one device does not
+propagate to other queues. There also may be practical reasons to match
+personnel with mechanisms such as the skill or authority needed to operate them.
+In the Starbucks example, we might reasonably expect all personnel to be
+adequately trained to manage all parts of drink preparation, as needed. However,
+in more complex production environments, such an arrangement may be impractical.
+Keeping personnel at one station may also obviate some tasks altogether.
+Cashiers, for example, would need to wash their hands far more frequently if
+they operated the cash register and food preparation equipment.
+
+By contrast, some retail food vendors, such as sandwich shops, make products
+that require more interaction with the customer to place their order. There, we
+often see a server handling one customer's order from start to finish, with a
+hand-off only at the cashier. While Starbucks customers may be expected to have
+their choices made soon after arriving, sandwich customers may need to be
+informed during food preparation what options are available to them based on
+their previous choices. This process may be too cumbersome to handle across
+multiple servers. This state of affairs is often seen whenever customers must be
+informed and make decisions iteratively, e.g., loan officers and travel agents.
+
+There are also trade-offs for customer experience to consider. On one hand, having a
+server operate a low latency initial queue such as taking orders at a cash
+register may improve customer experience by reducing pre-process wait times.
+On the other, the additional interaction and process information of the
+sandwich line may do so by reducing uncertain or unoccupied wait times.
+
 \end{document}
