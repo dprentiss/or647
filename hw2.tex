@@ -1,0 +1,202 @@
+\documentclass{amsart}
+\usepackage{times}
+\usepackage{tikz}
+\usepackage{cancel}
+
+\usetikzlibrary{arrows.meta}
+
+\title{Homework 2}
+\author{David Prentiss}
+
+\begin{document}
+\maketitle
+
+\section{} %1
+A cloud computing service is modeled as a fluid queue with time-dependent
+arrival rate $\lambda(t)$ and constant service rate $\mu$. Consider a situation where the
+arrival process has a burst. Initially, the arrival rate is $\lambda_1<\mu$. Then, for a
+period of length $T$, the arrival process is $\lambda_2>\mu$, after which it
+returns back to $\lambda_1$.
+
+\subsection*{a}
+What is the maximum queue length?
+\subsubsection*{Solution}
+Let the burst begin at time $t_0$ and end at $t_T$. For times $t<t_0$, the
+cumulative number of arrivals, $A(t)$, equals the cumulative number of
+departures, $D(t)$, since $\lambda(t) = \lambda_1 < \mu$. Therefore the queue
+length $L$ is zero. For times $t_0\leq t<t_T$ however, $\lambda(t) = t_2 > \mu$
+and cumulative arrivals are greater than cumulative departures. We also know
+that the queue length at time $t$, $L(t)$, is the difference $A(t)-D(t)$.
+Furthermore, the moment when the queue length is greatest is $t_T$. This follows
+from the fact that the queue length is increasing from $t_0$ to $t_T$ and begins
+decreasing at time $t_T$. So then,
+\begin{align}
+  L_\text{max} &= A(t_T) - D(t_T) \\
+  &= \int_{t_0}^{t_T}\lambda(t)dt - \int_{t_0}^{t_T}\mu dt + A(t_0)-D(t_0) \\
+  &= T(\lambda_2 - \mu)
+\end{align}
+
+\subsection*{b}
+What is the length of the busy period (i.e., the time from the start of the burst until the
+queue empties)?
+
+\subsubsection*{Solution}
+
+\subsection*{c}
+What is the total delay (among all jobs) due to the burst?
+
+\subsubsection*{Solution}
+
+\section{} %2
+A road segment is modeled as a fluid queue. The arrival rate is shown in the graph below,
+with a morning rush hour. After the morning rush hour, the transportation department
+begins maintenance work on the road. At 9 a.m., one of the three lanes on the road is
+closed, reducing the capacity of the road from 15 cars per minute to 10 cars per minute.
+The maintenance period ends at noon.
+\subsection*{d}
+Determine the average delay per car (over all cars from 6 a.m.to 1 p.m.).
+\subsubsection*{Solution}
+\subsection*{e}
+What is the maximum length of the queue over this period?
+\subsubsection*{Solution}
+\subsection*{f}
+At what time does the queue length return to 0?
+\subsubsection*{Solution}
+
+\section{Problem 8.12} %3
+Airplanes arrive at an airport at a rate of 30 per hour. The arrival capacity
+of the airport is 40 airplanes per hour during good weather. During periods
+of fog, the arrival capacity drops to 20 airplanes per hour. Suppose that the
+airport experiences fog from 8 am to 10 am. Using a fluid approximation,
+and considering only arrivals between 8 am and noon, what is the average
+delay for each airplane?
+\subsubsection*{Solution}
+
+\section{Problem 8.17} %4
+A traffic signal has a left-hand turn lane. The signal alternates from a red
+light to a green left-hand turn arrow (cars can turn left) to a solid green light
+(cars can turn left but must yield to oncoming traffic). Cars flow through
+the signal at a rate of 15 per minute when there is a left-hand arrow, but
+only 10 per minute when there is a regular green light. The signal spends
+2 min in red, 1 min as a green left-hand arrow, and 1 min as a green light.
+The arrival rate of cars who want to turn left is 6 per minute. Under a fluid
+approximation, what is the average time spent waiting to turn left?
+\subsubsection*{Solution}
+
+\section{Problem 8.18} %5
+The following diagram shows a freeway on-ramp. The maximum rate that
+cars can pass through point A is 60 per minute. Due to a stop light at B, the
+in-flow of cars to the freeway comes in waves. The stop light is “off” for
+2 min (during which no cars enter the freeway) and “on” for 1 min, during
+which cars enter the freeway at a rate of 30 per minute. During periods of
+congestion at A, assume that up to half of the flow-rate is applied to cars
+arriving from B (i.e., cars merge on a one-to-one basis).
+\subsection*{a}
+What is the maximum flow rate of cars through point C that maintains
+stability of the system?
+\subsubsection*{Solution}
+\subsection*{b}
+Assume that the flow rate of cars through C is 45 per minute. Using a
+fluid approximation, what is the average delay per car on the freeway
+due to the on-ramp?
+\subsubsection*{Solution}
+\subsection*{c}
+What is the average delay per car on the on-ramp?
+\subsubsection*{Solution}
+
+\section{Problem 2.12} %6
+A certain software company has a technical support line. Requests for
+technical support arrive according to a Poisson process with rate
+$\lambda=20\text{ per hour}$ hour. What is the probability that:
+\subsection*{a}
+No calls arrive during 1 hour?
+\subsubsection*{Solution}
+\subsection*{b}
+Exactly 5 calls arrive during 1 hour?
+\subsubsection*{Solution}
+\subsection*{c}
+5 or more calls arrive during 1 hour?
+\subsubsection*{Solution}
+
+\section{Problem 2.13} %7
+The following diagram represents a continuous-time Markov chain (where
+the numbers represent transition rates $q_{ij}$). Find the fraction of time the
+chain spends in each state.
+\begin{figure}[!h]
+  \begin{tikzpicture}[node distance={2cm}, state/.style = {draw, circle}]
+    \node[state] (A) {A};
+    \node[state] (B) [right of=A] {B};
+    \node[state] (C) [right of=B] {C};
+    \node[state] (D) [below of=B] {D};
+
+    \path[-Latex] (A) edge[bend left=15] node[above] {3} (B);
+    \draw[-Latex] (B) edge[bend left=15] node[below] {1} (A);
+    \draw[-Latex] (B) edge node[above] {2} (C);
+    \draw[-Latex] (D) edge node[left] {1} (B);
+    \draw[-Latex] (C) edge[bend left=10] node[below] {5} (D);
+    \draw[-Latex] (D) edge[bend left=10] node[above] {4} (C);
+  \end{tikzpicture}
+\end{figure}
+
+\subsubsection*{Solution}
+
+\section{Problem 2.15} %8
+Customers arrive at a shuttle stop according to a Poisson process with rate 3
+per hour. Shuttles arrive at the stop according to a Poisson process with
+rate 1.5 per hour. Suppose that each shuttle can hold at most 2 customers.
+Suppose that at most 4 people wait for the shuttle (subsequently arriving
+customers are turned away).
+\subsection*{a}
+ Model this process as a continuous-time Markov chain. Give the rate
+ transition matrix $\mathbf{Q}$.
+ \subsubsection*{Solution}
+\subsection*{b}
+Give the probability transition matrix $\mathbf{P}$ of the embedded discrete-time
+Markov chain.
+\subsubsection*{Solution}
+\subsection*{c}
+Solve for the stationary probabilities $p_i$ (of the CTMC) and $\pi_i$ (of the
+embedded DTMC).
+\subsubsection*{Solution}
+\subsection*{d}
+What is the average number of customers who enter a shuttle?
+\subsubsection*{Solution}
+
+\section{Problem 3.10} %9
+The following is a graph of the arrival rate of customers (over a 2-hour
+period). You decide to model this as an M/M/1 queue with service rate 30
+per hr. Compute the average wait in queue if you:
+\subsection*{a}
+Assume that the arrival rate is constant over the 2-hour period (dashed
+line)
+\subsubsection*{Solution}
+\subsection*{b}
+Assume that the arrival rate is constant over specific intervals (solid
+line). Assume the queue is in steady state over each interval, compute
+the average wait in queue for each interval and then compute the overall
+average wait in queue.
+\subsubsection*{Solution}
+\subsection*{c}
+Does the simpler model in (a) overestimate or underestimate the congestion compared with using a nonstationary model?
+\subsubsection*{Solution}
+
+\section{Problem 3.11} %10
+A car rental agency has a kiosk at the airport with a single customer service
+agent. Arrivals to the kiosk are Poisson with a rate of 8 per hour. The time
+to process a customer is exponential with a mean time of 5 minutes.
+\subsection*{a}
+What is the average time that a customer spends at the kiosk (wait in
+queue plus service time)?
+\subsubsection*{Solution}
+\subsection*{b}
+Suppose that an arriving customer will be late for a wedding if the time
+spent at the kiosk is more than 20 minutes. What is the probability the
+customer makes it to the wedding on time?
+\subsubsection*{Solution}
+\subsection*{c}
+What is the probability that the customer is late to the wedding but not
+less than 5 minutes late (i.e., the time spent at the kiosk is between 20
+and 25 minutes)?
+\subsubsection*{Solution}
+
+\end{document}
