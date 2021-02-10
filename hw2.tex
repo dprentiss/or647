@@ -1,12 +1,12 @@
-\documentclass{amsart}
+\documentclass[letterpaper]{amsart}
 \usepackage{times}
 \usepackage{tikz}
-\usepackage{cancel}
-
 \usetikzlibrary{arrows.meta}
 
-\title{Homework 2}
+\title[Homework 2]{Homework 2 \\ OR647: Queueing Theory, Spring 2021}
 \author{David Prentiss}
+\email{dprentis@gmu.edu}
+\date{\today}
 
 \begin{document}
 \maketitle
@@ -41,6 +41,17 @@ What is the length of the busy period (i.e., the time from the start of the burs
 queue empties)?
 
 \subsubsection*{Solution}
+\begin{align}
+  T_e(\mu - \lambda_1) &= T(\lambda_2 - \mu) \\
+  T_e &= \frac{T(\lambda_2 - \mu)}{\mu - \lambda_1}
+\end{align}
+So the total busy period, $T_b$, is
+\begin{align}
+  T_b &= T + T_e \\
+  &= T + \frac{T(\lambda_2 - \mu)}{\mu-\lambda_1} \\
+      &= \frac{T(\mu-\lambda_1)}{\mu-\lambda_1} + \frac{T(\lambda_2 - \mu)}{\mu-\lambda_1} \\
+  &=\frac{T(\lambda_2-\lambda_1)}{\mu-\lambda_1}
+\end{align}
 
 \subsection*{c}
 What is the total delay (among all jobs) due to the burst?
