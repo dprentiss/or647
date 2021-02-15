@@ -1,6 +1,7 @@
 \documentclass[letterpaper]{amsart}
 \usepackage{times}
 \usepackage{tikz}
+\usepackage{calc}
 \usetikzlibrary{arrows.meta}
 
 \title[Homework 2]{Homework 2 \\ OR647: Queueing Theory, Spring 2021}
@@ -21,7 +22,7 @@ returns back to $\lambda_1$.
 \subsection*{a}
 What is the maximum queue length?
 \subsubsection*{Solution}
-Let the burst begin at time $t_0$ and end at $t_T$. For times $t<t_0$, the
+Let the burst begin at time $t_0 = 0$ and end at $t_T = T$. For times $t<t_0$, the
 cumulative number of arrivals, $A(t)$, equals the cumulative number of
 departures, $D(t)$, since $\lambda(t) = \lambda_1 < \mu$. Therefore the queue
 length $L$ is zero. For times $t_0\leq t<t_T$ however, $\lambda(t) = t_2 > \mu$
@@ -57,6 +58,13 @@ So the total busy period, $T_b$, is
 What is the total delay (among all jobs) due to the burst?
 
 \subsubsection*{Solution}
+\begin{align}
+  L_\text{max} &= A(t_T) - D(t_T) \\
+  &= \int_{t_0}^{t_T}\lambda(t)dt - \int_{t_0}^{t_T}\mu dt + A(t_0)-D(t_0) \\
+               &= T(\lambda_2 - \mu)\\
+  \frac{1}{2}T^2(\lambda_2-\mu)\left( 1+\frac{\lambda_2-\mu}{\mu-\lambda_1} \right)\\
+  \frac{1}{2}T^2(\lambda_2-\mu)\left( \frac{\lambda_2-\lambda_1}{\mu-\lambda_1} \right)
+\end{align}
 
 \section{} %2
 A road segment is modeled as a fluid queue. The arrival rate is shown in the graph below,
@@ -67,6 +75,19 @@ The maintenance period ends at noon.
 \subsection*{d}
 Determine the average delay per car (over all cars from 6 a.m.to 1 p.m.).
 \subsubsection*{Solution}
+\begin{center}
+\begin{tabular}{rccccc}
+  time, $t$ (min) & 60 & 120 & 180 & 360 & \textbf{390}(f)\\
+  $\lambda(t)$ (veh/min)&10& 20& 30& 5& 5\\
+  $D^\prime(t)$ (veh/min)&10& 15& 15& 10& 15 \\
+  $A(t)$ (veh) &600& 1800 & 3600 & 4500& 4650 \\
+  $D(t)$ (veh) &600& 1500 & \textbf{2400}(e)& 4200& 4650 \\
+  Queue length (veh) &0&  300& 1200& 300&    0 \\
+  %$\int A(t)-D(t)$ (veh$\cdot$hr)&0&150 & 900 & 3150 & 3225 \\
+  Total delay (veh$\cdot$min)& 0 & 9000 & 54000 & 189000 & 193500\\
+  Average delay (min) & 0.0 & 5.0 & 15.0 & 42.0 & \textbf{41.61}(d)
+\end{tabular}
+\end{center}
 \subsection*{e}
 What is the maximum length of the queue over this period?
 \subsubsection*{Solution}
@@ -122,12 +143,23 @@ $\lambda=20\text{ per hour}$ hour. What is the probability that:
 \subsection*{a}
 No calls arrive during 1 hour?
 \subsubsection*{Solution}
+\begin{equation}
+\text{Pr}\{N(1)=0\}=e^{-20\cdot 1}\frac{(20\cdot 1)^0}{0!}
+\end{equation}
 \subsection*{b}
 Exactly 5 calls arrive during 1 hour?
 \subsubsection*{Solution}
+\begin{equation}
+\text{Pr}\{N(1)=5\}=e^{-20\cdot 1}\frac{(20\cdot 1)^5}{5!}
+\end{equation}
 \subsection*{c}
 5 or more calls arrive during 1 hour?
 \subsubsection*{Solution}
+\begin{equation}
+\text{Pr}\{N(1)\geq 5\}=
+1 - \text{Pr}\{N(1)\leq 4\}=
+1-e^{-20\cdot 1}\sum_{i=0}^4\frac{(20\cdot 1)^i}{i!}
+\end{equation}
 
 \section{Problem 2.13} %7
 The following diagram represents a continuous-time Markov chain (where
@@ -150,6 +182,44 @@ chain spends in each state.
 \end{figure}
 
 \subsubsection*{Solution}
+\begin{equation}
+  \{q_{ij}\}=
+\begin{bmatrix}
+  0 & 3 & 0 & 0 \\
+  1 & 0 & 2 & 0 \\
+  0 & 0 & 0 & 5 \\
+  0 & 1 & 4 & 0
+\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+  \{v_i\}=
+  \{q_{ij}\}J_{j,1} =
+\begin{bmatrix}
+  0 & 3 & 0 & 0 \\
+  1 & 0 & 2 & 0 \\
+  0 & 0 & 0 & 5 \\
+  0 & 1 & 4 & 0
+\end{bmatrix}
+\begin{bmatrix}
+  1 \\ 1 \\ 1 \\ 1
+\end{bmatrix}
+=
+\begin{bmatrix}
+  3 \\ 3 \\ 5 \\ 5
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+  \frac{\{v_i\}}{\lVert\{v_i\}\rVert_1}
+  =
+\begin{bmatrix}
+  \frac{3}{16} & \frac{3}{16} & \frac{3}{16} & \frac{3}{16}
+\end{bmatrix}^\mathsf{T}
+=
+\begin{bmatrix}
+  0.1875 \\ 0.1875 \\ 0.3125 \\ 0.3125
+\end{bmatrix}
+\end{equation}
 
 \section{Problem 2.15} %8
 Customers arrive at a shuttle stop according to a Poisson process with rate 3
@@ -160,18 +230,118 @@ customers are turned away).
 \subsection*{a}
  Model this process as a continuous-time Markov chain. Give the rate
  transition matrix $\mathbf{Q}$.
- \subsubsection*{Solution}
+\subsubsection*{Solution}
+Assume arriving shuttles are empty.
+\begin{equation}
+  \{q_{ij}\}=
+\begin{bmatrix}
+  0 & 3 & 0 & 0 & 0 \\
+  1.5 & 0 & 3 & 0 & 0 \\
+  1.5 & 0 & 0 & 3 & 0 \\
+  0 & 1.5 & 0 & 0 & 3 \\
+  0 & 0 & 1.5 & 0 & 0
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+  \{v_i\}=
+  \{q_{ij}\}J_{j,1} =
+\begin{bmatrix}
+  3 \\ 4.5 \\ 4.5 \\ 4.5 \\ 1.5
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+  \mathbf{Q} =
+\begin{bmatrix}
+  -3 & 3 & 0 & 0 & 0 \\
+  1.5 & -4.5 & 3 & 0 & 0 \\
+  1.5 & 0 & -4.5 & 3 & 0 \\
+  0 & 1.5 & 0 & -4.5 & 3 \\
+  0 & 0 & 1.5 & 0 & -1.5
+\end{bmatrix}
+\end{equation}
 \subsection*{b}
 Give the probability transition matrix $\mathbf{P}$ of the embedded discrete-time
 Markov chain.
 \subsubsection*{Solution}
+\begin{equation}
+  \mathbf{P} =
+\begin{bmatrix}
+  0 & 1 & 0 & 0 & 0 \\
+  \frac{1}{3} & 0 & \frac{2}{3} & 0 & 0 \\
+  \frac{1}{3} & 0 & 0 & \frac{2}{3} & 0 \\
+  0 & \frac{1}{3} & 0 & 0 & \frac{2}{3} \\
+  0 & 0 & 1 & 0 & 0
+\end{bmatrix}
+\end{equation}
 \subsection*{c}
 Solve for the stationary probabilities $p_i$ (of the CTMC) and $\pi_i$ (of the
 embedded DTMC).
 \subsubsection*{Solution}
+\begin{equation}
+  \vec{p} =
+\begin{bmatrix}
+  \frac{11}{57} &
+  \frac{10}{57} &
+  \frac{4}{19} &
+  \frac{8}{57} &
+  \frac{16}{57}
+\end{bmatrix}
+\end{equation}
+\begin{align}
+  \mathbf{0} &=\vec{\pi}(\mathbf{P}-\mathbf{I}) \\
+\begin{bmatrix}
+  \left[\mathbf{P}-\mathbf{I}\right]^\mathsf{T} \\
+  J_{1,j}
+\end{bmatrix}
+  \vec{\pi} &=
+              \begin{bmatrix}
+                \mathbf{0} \\
+                1
+              \end{bmatrix}
+  \\
+  \mathbf{0} &=\vec{\pi}
+\begin{bmatrix}
+  -1 & 1 & 0 & 0 & 0 \\
+  \frac{1}{3} & -1 & \frac{2}{3} & 0 & 0 \\
+  \frac{1}{3} & 0 & -1 & \frac{2}{3} & 0 \\
+  0 & \frac{1}{3} & 0 & -1 & \frac{2}{3} \\
+  0 & 0 & 1 & 0 & -1
+\end{bmatrix}
+\end{align}
+\begin{equation}
+  \vec{\pi} =
+\begin{bmatrix}
+  \frac{11}{64} &
+  \frac{15}{64} &
+  \frac{9}{32} &
+  \frac{3}{16} &
+  \frac{1}{8}
+\end{bmatrix}
+\end{equation}
 \subsection*{d}
 What is the average number of customers who enter a shuttle?
 \subsubsection*{Solution}
+
+\begin{equation}
+\begin{aligned}
+  \frac{11}{57}\cdot 0\text{ passengers}
+  &+
+  \frac{10}{57}\cdot 1\text{ passenger}
+  +
+  2\text{ passengers}
+  \left(
+  \frac{4}{19}
+  +
+  \frac{8}{57}
+  +
+  \frac{16}{57}
+  \right)\\
+  &=
+  \frac{82}{57}\text{ passengers}
+  \approx 1.44\text{ passengers}
+\end{aligned}
+\end{equation}
+
 
 \section{Problem 3.10} %9
 The following is a graph of the arrival rate of customers (over a 2-hour
@@ -199,6 +369,11 @@ to process a customer is exponential with a mean time of 5 minutes.
 What is the average time that a customer spends at the kiosk (wait in
 queue plus service time)?
 \subsubsection*{Solution}
+Let
+$\lambda=5/\text{ h}$ and $\mu=\frac{1}{5}\text{ / min}=12/\text{ h}$,
+then $\rho=\frac{5}{12}$.
+$L_q=\frac{\rho^2}{1-\rho}=\frac{25}{72}\approx 0.347$
+$L=\frac{\rho}{1-\rho}=\frac{5}{6}\approx 0.833$
 \subsection*{b}
 Suppose that an arriving customer will be late for a wedding if the time
 spent at the kiosk is more than 20 minutes. What is the probability the
