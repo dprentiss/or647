@@ -1,0 +1,7 @@
+*.pdf
+*.aux
+*.log
+*.ipynb
+*.synctex.gz
+auto/
+*.swp
