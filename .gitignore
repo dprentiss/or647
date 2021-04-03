@@ -1,7 +1,7 @@
 *.pdf
 *.aux
 *.log
-*.ipynb
 *.synctex.gz
 auto/
 *.swp
+.ipynb_checkpoints/
