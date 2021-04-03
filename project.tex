@@ -7,6 +7,8 @@
 \author{David Prentiss}
 \date{\today}
 \maketitle
+\section{Motivation}
+\section{Queueing model}
 Consider a two-way, two-lane road segment connecting two at-grade, controlled
 intersections. Suppose that in one direction, vehicles arrive at the upstream
 end of their respective lane according to a Poisson process with mean arrival
@@ -14,55 +16,82 @@ rate $\lambda$. We will, for the moment, ignore the other lane.
 
 Suppose also, that arriving vehicles are in one of two classes, $A$ or $B$.
 Furthermore vehicles in each class arrive in equal proportion such that their
-respective mean arrival rates are $\lambda_A=\lambda_B=\lambda/2$.
-We leave the practical difference between the two classes deliberately abstract. However,
-it may be useful to think of the two classes as being different intended turning motions.
-For now, the only practical difference is that the downstream intersection
-controls will admit only one class or the other in a single phase. Equivalently,
-we could say that, during a single phase the intersection admits all and only
-the vehicles of the same class that happen to be adjacent to each other at the
-head of the queue. For example, if the sequence of vehicles starting from the head of the
-queue had classes $\{A,B,B,A,A,A,B,B\}$, then the intersection would, in sequential
-phases, admit one vehicle of type $A$, then two vehicles of type $B$, then three vehicles
-of type $A$, and so on.
+respective mean arrival rates are $\lambda_A=\lambda_B=\lambda/2$. We leave the
+practical difference between the two classes deliberately abstract. However, it
+may be useful to think of the two classes as being different intended turning
+motions. For now, the only practical difference is that the downstream
+intersection controls will admit only one class or the other in a single phase.
+Equivalently, we could say that, during a single phase the intersection admits
+all and only the vehicles of the same class that happen to be adjacent to each
+other at the head of the queue. For example, if the sequence of vehicles
+starting from the head of the queue had classes $\{A,B,B,A,A,A,B,B\}$, then the
+intersection would, in sequential phases, admit one vehicle of type $A$, then
+two vehicles of type $B$, then three vehicles of type $A$, and so on.
+
 
 For the purposes of analysis, we make the following, additional simplifying
-assumptions regarding vehicle dynamics.
-First, time and space are discretized such that each vehicle takes the space of
-one cell and can move, at most, one cell per time step.
-The time then, for $n$ vehicles to enter the intersection is $T_n=n$ steps,
-where $n$ is a random variable representing the number of vehicles admitted
-through the intersection during a given phase.
-Second, vehicles that enter the intersection are considered to have left the system.
-And third, the time until the next phase is $T_n+T_p$, where $T_n = t(n)$ and $T_p$ is a random variable
-representing the time necessary for the intersection to complete some other,
-mutually exclusive activities such as another phase for vehicles in other,
-un-modeled legs.
-For now, we will say of $T_p$ only that it is i.i.d.\ as $T_n$.
+assumptions regarding vehicle dynamics. First, time and space are discretized
+such that each vehicle takes the space of one cell and can move, at most, one
+cell per time step. The time then, for $n$ vehicles to enter the intersection is
+$T_n=n$ steps, where $n$ is a random variable representing the number of
+vehicles admitted through the intersection during a given phase. Second,
+vehicles that enter the intersection are considered to have left the system. And
+third, the time until the next phase is $T_n+T_p$, where $T_n = t(n)$ and $T_p$
+is a random variable representing the time necessary for the intersection to
+complete some other, mutually exclusive activities such as another phase for
+vehicles in other, un-modeled legs. For now, we will say of $T_p$ only that it
+is i.i.d.\ as $T_n$.
 
+\subsection{Typical two-lane road with batch service}
 We will take expected rate of departure, $\mu$ to be the expected value of
 \begin{equation*}
   \frac{n}{T_n+T_p}.
 \end{equation*}
 Since $T_n=n$ steps/vehicle, then $\text{E}[n]=\text{E}[T_n]$ vehicles.
-That is, the expected number of steps it takes the next group of vehicles to enter the
-intersection is equal to the expected number of vehicles in that group. So we
-have
+That is, the expected number of steps it takes the next group of vehicles to
+enter the intersection is equal to the expected number of vehicles in that
+group. So we have
 \begin{equation*}
   \mu = \text{E}\left[\frac{n}{T_n+T_p}\right]
   =\text{E}\left[\frac{n}{n+n}\right] = \frac{1}{2}\text{ (vehicles/step)}.
 \end{equation*}
 
-Now suppose that we moved the stop bar back some number of cells $k$.
-
+\subsection{Moving the stop bar}
+Now suppose that we moved the stop bar upstream of the intersection some number of cells $k$.
+That is, rather than vehicles forming a queue directly adjacent to the
+intersection, the head of the queue now waits $k$ cells away.
 Then $\text{E}[T_n]=\text{E}[T_p]=\text{E}[n]+k$ and
-
 \begin{equation*}
   \mu = \text{E}\left[\frac{n}{T_n+T_p}\right]
   = \text{E}\left[\frac{n}{2(n+k)}\right]
-  = \frac{1}{2}\text{E}\left[\frac{n}{n+k}\right]
+  = \frac{1}{2}\text{E}\left[\frac{n}{n+k}\right]\text{ (vehicles/step)}.
+\end{equation*}
+Since the interarrival time distributions of vehicles in each class are i.i.d.\ and
+$\lambda_A=\lambda_B$, the probability that any given arriving vehicle is in a
+different class than the previous vehicle is $1/2$.
+If we think of such an arrival as a ``success'' of a Bernoulli trial,
+then $n\sim \text{Geo}(p=1/2)$ with support $m$ vehicles, where
+$m\in\{1,2,3,\dots\}$, and mean $\text{E}[n]=1/p=2$.
+So then,
+\begin{equation*}
+  \mu=\frac{1}{2+k}\text{ (vehicles/step)}.
 \end{equation*}
 
+\subsection{Priority queueing on two lanes}
+We have so far ignored the adjacent, second lane. Suppose now that we appropriate that
+lane exclusively for passing. Furthermore, suppose that both lanes have length
+$L$ cells and that any vehicles of the appropriate class may use the passing
+lane to advance to and enter the intersection.
+
+Suppose, without loss of generality, that the current phase permits vehicles of
+class $A$. Then the previous phase will have removed all vehicles of type $B$
+and the remaining vehicles, of type $A$, will have moved to the head of the
+queue, with the rest of the space being filled with newly queued vehicles in
+equal proportions.
+If the number of vehicles of type $B$ passed in the previous phase is $n_{p-1}$, then the number
+of vehicles of type $A$ that moved to the head of the queue is $n_p^*=L-n_{p-1}$.
+and the number $n$ of vehicles to be admitted this phase is $n_p^*$ plus the
+proportion of $L - n_p^*$ newly arriving vehicles that are of type $A$.
 \end{document}
 
 \section{Drafts}
