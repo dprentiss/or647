@@ -5,3 +5,5 @@
 auto/
 *.swp
 .ipynb_checkpoints/
+*.bbl
+*.blg
