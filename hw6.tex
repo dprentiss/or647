@@ -1,0 +1,221 @@
+\documentclass[letterpaper]{amsart}
+\usepackage{float}
+\usepackage{times}
+\usepackage{tikz}
+\usepackage{calc}
+\usepackage{booktabs, siunitx}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usetikzlibrary{arrows.meta}
+
+\title[Homework 6]{Homework 6 \\ OR647: Queueing Theory, Spring 2021}
+\author{David Prentiss}
+\email{dprentis@gmu.edu}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{} %1
+An airline check-in counter is modeled as a non-preemptive priority queue with a
+single server. Priority customers arrive according to a Poisson process with
+rate $\lambda_1=5$ per hour. Regular customers arrive according to a Poisson process
+with rate $\lambda_2=8$ per hour. Service times are exponential with a mean of 4
+minutes (for both regular and priority customers).
+
+\subsection*{a}
+What is the average wait in queue for non-priority customers?
+\subsubsection*{Solution}
+\begin{align*}
+  \mu &= 60/4=15\text{ per hour}\\
+  \rho &=  \frac{\lambda_1+\lambda_2}{\mu} = \frac{13}{15}\\
+  L_q^{(2)}&=\frac{\lambda_2\rho}{(\mu-\lambda_1)(1-\rho)}=\frac{8(13/15)}{(15-5)(1-(13/15))}
+             = 5.2 \\
+  W_q^{(2)}=
+\end{align*}
+
+\subsection*{b}
+Priority customers pay \$360 for a ticket. Non-priority customers pay \$300 for a ticket. Suppose that a given customer’s value of time is \$100 per hour. (This means that one hour of time spent at the counter effectively costs this customer \$100.) Should this one customer pay for the priority service? Assume all other customers remain the same.
+\subsubsection*{Solution}
+
+\subsection*{c}
+Repeat part (a) under the assumption that the service distribution is
+Erlang-2 with a mean of 4 minutes.
+\subsubsection*{Solution}
+
+\subsection*{d}
+Now suppose that \emph{every} customer decides to pay for priority service. What
+is the average wait in queue (under the assumption of an Erlang-2 service
+distribution)?
+\subsubsection*{Solution}
+
+\section{} %2
+A single router processes two kinds of packets – voice packets and data packets.
+Voice packets are given priority over data packets (there is no pre-emption).
+Voice packets arrive according to a Poisson process with a rate of .3 per msec.
+The time to process a voice packet is exponentially distributed with a mean of 1
+msec. Data packets arrive according to a Poisson process with a rate of .1 per
+msec. The time to process a data packet is exponentially distributed with a mean
+of 4 msec.
+\subsection*{a}
+Determine the average delay in queue for voice packets and the average
+delay in queue for data packets.
+\subsubsection*{Solution}
+\subsection*{b}
+Now assume that service times are deterministic with the same average
+values as given previously. Find the average delay in queue for each type
+of packet under the same priority scheme.
+\subsubsection*{Solution}
+\subsection*{c}
+If packets are served FCFS, determine the average delay in queue for an
+arbitrary packet (with deterministic service times).
+\subsubsection*{Solution}
+
+\section{} %3
+Consider an M/G/1 queue with $\lambda = 2$ per minute. The service distribution has a
+mean of 0.25 minutes. For the service distribution, a standard deviation of 1/M
+(minutes) can be achieved for a pro-rated cost of \$M per minute. The cost of
+delay is \$3 per minute of delay in queue per customer. What is the standard
+deviation of service time that minimizes cost?
+\subsubsection*{Solution}
+
+\section{Problem 6.21} %4
+Customers arrive at an ATM machine according to a Poisson process with
+rate $\lambda= 60$/h. The following transaction times are observed (in seconds):
+28, 71, 70, 70, 51, 62, 36, 25, 35, 87, 69, 27, 56, 25, 36.
+\subsection*{a}
+Would an $M/M/1$ queue be an appropriate model for this system (why
+or why not)?
+\subsubsection*{Solution}
+\subsection*{b}
+Estimate the average number of people waiting in line at the ATM
+\subsubsection*{Solution}
+\subsection*{c}
+The bank wishes to keep the average line length (number in queue) less
+than or equal to one. What is the average transaction time needed to
+achieve this goal (assuming that the variance of the transaction times is
+held constant)?
+\subsubsection*{Solution}
+
+\section{} %5
+Customers arrive at a single-server queue according to a Poisson process with rate
+10 per hour. Suppose that 70\% of arrivals require basic service and 30\% require
+advanced service. The time to complete basic service is exponential with a mean
+of 3 minutes. The time to complete advanced service is exponential with a mean
+of 10 minutes.
+\subsection*{a}
+Model this as an $M/G/1$ queue. Determine $L_q$ and $W$ for this system
+\subsubsection*{Solution}
+\subsection*{b}
+What is $L_q$ if the advanced service time can be changed from an
+exponential random variable to a deterministic random variable with the
+same mean of 10 minutes?
+\subsubsection*{Solution}
+
+\end{document}
+
+\section{Problem 5.24} %2
+Tonyexpress, a regional truck delivery service has a fleet of 50 trucks.
+Routine maintenance is done during off hours, so no trucks are unavailable
+for service because of routine maintenance. However, trucks do break
+down periodically and require repair. The breakdown process can be well
+approximated by a Poisson process, and repair records indicate a mean
+time to breakdown of 38 days. Sixty-eight percent of these breakdowns
+can be handled at Tonyexpress’ own repair facility; the remainder must be
+handled by the manufacturer (the fleet consists of all the same make of
+trucks). Furthermore, about 7\% of those sent to local repair must, after
+being worked on, be sent on to the manufacturer’s repair facility. Repair
+times at the local repair facility are exponentially distributed with a mean
+of 2.75 days, and there are four repair bays, but only three operate at any
+given time, since there are only three repair crews available. Turnaround
+times for those sent to the factory have been found to be IID exponential
+random variables, with a mean of 10 days (since Tonyexpress is such a good
+customer, whenever a truck is received by the manufacturer, a mechanic
+is immediately put on the job). Since trucks are so well cared for, it is
+not unreasonable to assume that repaired trucks are as good as new. When
+trucks break down, Tonyexpress has a contract with TowsRus, a towing
+company with a very ample fleet of tow trucks. The mean time to pick up
+and tow a truck to the Tonyexpress facility is 0.15 days, and the mean time
+to tow a truck to the manufacturer (from the field or from Tonyexpress) is
+0.75 days. Tony, the CEO of Tonyexpress, hires you to advise whether he
+should hire another repair crew. His major performance measure is truck
+availability he is interested in the expected fraction of trucks available and
+the percentage of time that he has at least 45 trucks operational.
+\subsubsection*{Solution}
+(I did not get QTS running and I ran out of time implementing the regular
+mean-value analysis algorithm in Python. There is some work in the attched code,
+for what it's worth.)
+
+
+\section{Problem 4.4} %3
+Shuttle buses take customers from an airport terminal to a rental-car agency.
+Suppose that the arrival of buses at the rental-car agency is a Poisson process
+with rate 6 per hour. The number of passengers on a given bus roughly
+follows a Poisson random variable with a mean of 5.
+\subsection*{a}
+Suppose that there is a single server at the rental-car agency and that the
+time for the server to process a customer is exponentially distributed
+with a mean of 1.5 min. Determine the average time each customer
+spends in the rental-car agency (including service time).
+\subsubsection*{Solution}
+Assume $M^{[X]}/M/1$ model.
+Let $\lambda = 6/60 = 1/10 \text{ per/min}$, $\text{E}[X] = 5$ and $\mu=2/3\text{ per/min}$.
+Then $\rho = 1/10\cdot 5 \cdot 3/2 =3/4$, $\text{E}[X^2] = \text{Var}[X] +
+(\text{E}[X])^2=5 + 25 = 30$ and
+\begin{equation*}
+  L = \frac{3/4+1/10\cdot 3/2\cdot 30}{2(1-3/4)} = 39/4 = 9.75.
+\end{equation*}
+So,
+\begin{equation*}
+  W = \frac{L}{\lambda\text{E}[X]}=39/2 = 19.5 \text{ min}.
+\end{equation*}
+\subsection*{b}
+Now, suppose that the rental-car agency is located right next to the
+terminal, so that customers can walk directly to the agency rather than
+taking a shuttle. In this case, it may be reasonable to assume that
+customers arrive according to a Poisson process with a rate of 30 per
+hour. Now, what is the average time each customer spends in the rental
+car agency?
+\subsubsection*{Solution}
+Assume $M/M/1$ model.
+Let $\lambda = 1/2\text{ per/min}$ and $\mu = 2/3\text{ per/min}$.
+Then $\rho = 3/4$ and
+\begin{equation*}
+  W = \frac{1}{\mu - \lambda} =\frac{1}{2/3 - 1/2}= 6\text{ min}.
+\end{equation*}
+
+\section{Problem 4.22} %4
+Isle-Air Airlines offers air shuttle service between San Juan and Charlotte
+Amalie every 2 h. The procedure calls for no advance reservations but
+for passengers to purchase their tickets at the gate from which the shuttle
+leaves. It is found that passengers arrive according to a Poisson distribution
+with a mean of 18/h. There is one agent at the gate check-in counter, and
+a time study provided the following 50 observations on the processing time
+in minutes: 4.00, 1.44, 4.44, 1.74, 1.16, 4.20, 3.59, 2.14, 3.54, 2.56, 5.53, 2.02, 3.06,
+1.66, 3.23, 4.84, 7.99, 3.07, 1.24, 3.40, 5.01, 2.78, 1.62, 5.19, 5.09, 3.78,
+1.52, 3.94, 1.96, 6.20, 3.67, 3.37, 1.84, 1.60, 1.31, 5.64, 0.99, 3.06, 1.24,
+3.11, 4.57, 0.90, 2.78, 1.64, 2.43, 5.26, 2.11, 4.27, 3.36, 4.76.
+
+On average, how many are in the queue waiting for tickets, and what is the
+average wait in the queue? [Hint: Find the sample mean and variance of
+the observed service times, and see what distribution might fit.]
+\subsubsection*{Solution}
+The sample mean and variance are approximately 3.197 and 2.464 respectively.
+Assume the distribution of service times is $E_4(5/4)$ with mean and
+variance of $16/5=3.2$ and $16/25=2.56$ respectively.
+Assume also an $M/E_4/1$ model.
+Let $\lambda=18/60=3/10$.
+Then $\rho = 24/25$ and we have
+\begin{align*}
+  L_q &= \frac{1+1/k}{2}\frac{\rho^2}{1-\rho}
+        = \frac{1+1/4}{2}\frac{(24/25)^2}{1-24/25}
+  = \frac{72}{5} = 14.4\\
+  W_q &= \frac{L_q}{\lambda} = \frac{72}{5}  \frac{10}{3}= 48\text{ min}.
+\end{align*}
+
+\section{} %4
+Provide a short paragraph description of what you plan to do for your project.
+\subsubsection*{Solution}
+See attached PDF. This is what I have so far. There is no introduction at the
+moment but I hope to send that along soon.
+\end{document}

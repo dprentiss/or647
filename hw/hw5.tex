@@ -1,0 +1,160 @@
+\documentclass[letterpaper]{amsart}
+\usepackage{float}
+\usepackage{times}
+\usepackage{tikz}
+\usepackage{calc}
+\usepackage{booktabs, siunitx}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usetikzlibrary{arrows.meta}
+
+\title[Homework 5]{Homework 5 \\ OR647: Queueing Theory, Spring 2021}
+\author{David Prentiss}
+\email{dprentis@gmu.edu}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Problem 5.23} %1
+Find the average number of customers at each node and the node delay time for a closed network with 35 customers circulating between seven nodes using the switch matrix given below and assuming the same service rates as in Problem 5.10.
+\subsubsection*{Problem 5.10}
+Nodes 1 and 2 have service rates of 85, nodes 3 and 4 have rates of 120, node 5
+has a rate of 70, and nodes 6 and 7 have rates of 20 (all in units per minute).
+\begin{equation*}
+  \begin{bmatrix}
+    \frac{1}{3} & \frac{1}{4} & 0 & \frac{1}{4} & 0 & \frac{1}{6} & 0 \\[0.5ex]
+    \frac{1}{3} & \frac{1}{4} & 0 & \frac{1}{4} & \frac{1}{6} & 0 & 0 \\[0.5ex]
+    0 & 0 & \frac{1}{3} & \frac{1}{3} & \frac{1}{3} & 0 & 0 \\[0.5ex]
+    \frac{1}{3} & 0 & \frac{1}{3} & 0 & \frac{1}{3} & 0 & 0 \\[0.5ex]
+    0 & 0 & 0 & \frac{5}{6} & 0 & 0 & \frac{1}{6} \\[0.5ex]
+    \frac{1}{6} & \frac{1}{6} & \frac{1}{6} & \frac{1}{6} & \frac{1}{6} & \frac{1}{6} & 0 \\[0.5ex]
+    0 & \frac{1}{6} & \frac{1}{6} & \frac{1}{6} & \frac{1}{6} & \frac{1}{6} & \frac{1}{6}
+  \end{bmatrix}
+\end{equation*}
+\subsubsection*{Solution}
+Let $M=35$ and $\mu=\{85,85, 120, 120,70, 20, 20\}$.
+Solving the traffic equations with $v_6=1$ we have
+\begin{equation*}
+v\approx\{5.536, 2.358, 4.607, 8.060, 5.000, 1.307, 1.000\}
+\end{equation*}
+Then, using the Bard-Schweitzer algorithm for mean-value anaylsis, we find
+\begin{equation*}
+  L(35) \approx \{5.635, 0.579, 1.023, 7.018, 13.073, 5.767, 1.904\}
+\end{equation*}
+Then, using mean-value anaylsis again, we find
+\begin{equation*}
+  L(34) \approx \{5.519, 0.577, 1.017, 6.843, 12.511, 5.646, 1.887\}
+\end{equation*}
+So then,
+\begin{equation*}
+  W(35) = \left\{\frac{1+L_i(34)}{\mu_i}\right\}_{i\in\{1,2,\dots,7\}}\approx \{0.077, 0.019, 0.017, 0.065, 0.193, 0.332, 0.144\}
+\end{equation*}
+
+
+
+\section{Problem 5.24} %2
+Tonyexpress, a regional truck delivery service has a fleet of 50 trucks.
+Routine maintenance is done during off hours, so no trucks are unavailable
+for service because of routine maintenance. However, trucks do break
+down periodically and require repair. The breakdown process can be well
+approximated by a Poisson process, and repair records indicate a mean
+time to breakdown of 38 days. Sixty-eight percent of these breakdowns
+can be handled at Tonyexpress’ own repair facility; the remainder must be
+handled by the manufacturer (the fleet consists of all the same make of
+trucks). Furthermore, about 7\% of those sent to local repair must, after
+being worked on, be sent on to the manufacturer’s repair facility. Repair
+times at the local repair facility are exponentially distributed with a mean
+of 2.75 days, and there are four repair bays, but only three operate at any
+given time, since there are only three repair crews available. Turnaround
+times for those sent to the factory have been found to be IID exponential
+random variables, with a mean of 10 days (since Tonyexpress is such a good
+customer, whenever a truck is received by the manufacturer, a mechanic
+is immediately put on the job). Since trucks are so well cared for, it is
+not unreasonable to assume that repaired trucks are as good as new. When
+trucks break down, Tonyexpress has a contract with TowsRus, a towing
+company with a very ample fleet of tow trucks. The mean time to pick up
+and tow a truck to the Tonyexpress facility is 0.15 days, and the mean time
+to tow a truck to the manufacturer (from the field or from Tonyexpress) is
+0.75 days. Tony, the CEO of Tonyexpress, hires you to advise whether he
+should hire another repair crew. His major performance measure is truck
+availability he is interested in the expected fraction of trucks available and
+the percentage of time that he has at least 45 trucks operational.
+\subsubsection*{Solution}
+(I did not get QTS running and I ran out of time implementing the regular
+mean-value analysis algorithm in Python. There is some work in the attched code,
+for what it's worth.)
+
+
+\section{Problem 4.4} %3
+Shuttle buses take customers from an airport terminal to a rental-car agency.
+Suppose that the arrival of buses at the rental-car agency is a Poisson process
+with rate 6 per hour. The number of passengers on a given bus roughly
+follows a Poisson random variable with a mean of 5.
+\subsection*{a}
+Suppose that there is a single server at the rental-car agency and that the
+time for the server to process a customer is exponentially distributed
+with a mean of 1.5 min. Determine the average time each customer
+spends in the rental-car agency (including service time).
+\subsubsection*{Solution}
+Assume $M^{[X]}/M/1$ model.
+Let $\lambda = 6/60 = 1/10 \text{ per/min}$, $\text{E}[X] = 5$ and $\mu=2/3\text{ per/min}$.
+Then $\rho = 1/10\cdot 5 \cdot 3/2 =3/4$, $\text{E}[X^2] = \text{Var}[X] +
+(\text{E}[X])^2=5 + 25 = 30$ and
+\begin{equation*}
+  L = \frac{3/4+1/10\cdot 3/2\cdot 30}{2(1-3/4)} = 39/4 = 9.75.
+\end{equation*}
+So,
+\begin{equation*}
+  W = \frac{L}{\lambda\text{E}[X]}=39/2 = 19.5 \text{ min}.
+\end{equation*}
+\subsection*{b}
+Now, suppose that the rental-car agency is located right next to the
+terminal, so that customers can walk directly to the agency rather than
+taking a shuttle. In this case, it may be reasonable to assume that
+customers arrive according to a Poisson process with a rate of 30 per
+hour. Now, what is the average time each customer spends in the rental
+car agency?
+\subsubsection*{Solution}
+Assume $M/M/1$ model.
+Let $\lambda = 1/2\text{ per/min}$ and $\mu = 2/3\text{ per/min}$.
+Then $\rho = 3/4$ and
+\begin{equation*}
+  W = \frac{1}{\mu - \lambda} =\frac{1}{2/3 - 1/2}= 6\text{ min}.
+\end{equation*}
+
+\section{Problem 4.22} %4
+Isle-Air Airlines offers air shuttle service between San Juan and Charlotte
+Amalie every 2 h. The procedure calls for no advance reservations but
+for passengers to purchase their tickets at the gate from which the shuttle
+leaves. It is found that passengers arrive according to a Poisson distribution
+with a mean of 18/h. There is one agent at the gate check-in counter, and
+a time study provided the following 50 observations on the processing time
+in minutes: 4.00, 1.44, 4.44, 1.74, 1.16, 4.20, 3.59, 2.14, 3.54, 2.56, 5.53, 2.02, 3.06,
+1.66, 3.23, 4.84, 7.99, 3.07, 1.24, 3.40, 5.01, 2.78, 1.62, 5.19, 5.09, 3.78,
+1.52, 3.94, 1.96, 6.20, 3.67, 3.37, 1.84, 1.60, 1.31, 5.64, 0.99, 3.06, 1.24,
+3.11, 4.57, 0.90, 2.78, 1.64, 2.43, 5.26, 2.11, 4.27, 3.36, 4.76.
+
+On average, how many are in the queue waiting for tickets, and what is the
+average wait in the queue? [Hint: Find the sample mean and variance of
+the observed service times, and see what distribution might fit.]
+\subsubsection*{Solution}
+The sample mean and variance are approximately 3.197 and 2.464 respectively.
+Assume the distribution of service times is $E_4(5/4)$ with mean and
+variance of $16/5=3.2$ and $16/25=2.56$ respectively.
+Assume also an $M/E_4/1$ model.
+Let $\lambda=18/60=3/10$.
+Then $\rho = 24/25$ and we have
+\begin{align*}
+  L_q &= \frac{1+1/k}{2}\frac{\rho^2}{1-\rho}
+        = \frac{1+1/4}{2}\frac{(24/25)^2}{1-24/25}
+  = \frac{72}{5} = 14.4\\
+  W_q &= \frac{L_q}{\lambda} = \frac{72}{5}  \frac{10}{3}= 48\text{ min}.
+\end{align*}
+
+\section{} %4
+Provide a short paragraph description of what you plan to do for your project.
+\subsubsection*{Solution}
+See attached PDF. This is what I have so far. There is no introduction at the
+moment but I hope to send that along soon.
+\end{document}
