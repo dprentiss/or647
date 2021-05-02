@@ -58,35 +58,81 @@ So, given the customer's value of money, she should choose non-priority service.
 Repeat part (a) under the assumption that the service distribution is
 Erlang-2 with a mean of 4 minutes.
 \subsubsection*{Solution}
-
+Let the service time be a random variable distributed as
+$S\sim\text{Erlang}(2,2\mu)$. For general service distributions
+\begin{align*}
+W_q^{2}&=\frac{\lambda\text{E}[S^2]/2}{(1-\sigma_1)(1-\sigma_2)} \\
+  \text{E}[S^2]&=\frac{1}{2\mu^2} \\
+  \text{Var}[S] &= \frac{2}{2\mu^2} \\
+  \text{E}[S^2]&=\text{Var}[S]+\text{E}[S]^2
+                 = \frac{2}{2\mu^2} + \frac{1}{2\mu^2} = \frac{3}{2\mu^2}
+                 = \frac{3}{2\cdot 15^2} = \frac{1}{150} \\
+W_q^{2}&=\frac{(8+5)(1/150)/2}{(1-(5/15))(1-(13/15))}
+         = \frac{39}{80} = 0.4875 \text{ hr}
+\end{align*}
 
 \subsection*{d}
 Now suppose that \emph{every} customer decides to pay for priority service. What
 is the average wait in queue (under the assumption of an Erlang-2 service
 distribution)?
 \subsubsection*{Solution}
+\begin{align*}
+W_q^{1}&=\frac{\lambda\text{E}[S^2]/2}{1-\rho} \\
+W_q^{1}&=\frac{(8+5)(1/150)/2}{1-(13/15)}
+         = \frac{13}{40} = 0.325 \text{ hr}
+\end{align*}
 
 \section{} %2
 A single router processes two kinds of packets – voice packets and data packets.
 Voice packets are given priority over data packets (there is no pre-emption).
-Voice packets arrive according to a Poisson process with a rate of .3 per msec.
+Voice packets arrive according to a Poisson process with a rate of 0.3 per ms.
 The time to process a voice packet is exponentially distributed with a mean of 1
-msec. Data packets arrive according to a Poisson process with a rate of .1 per
-msec. The time to process a data packet is exponentially distributed with a mean
-of 4 msec.
+ms. Data packets arrive according to a Poisson process with a rate of 0.1 per
+ms. The time to process a data packet is exponentially distributed with a mean
+of 4 ms.
 \subsection*{a}
 Determine the average delay in queue for voice packets and the average
 delay in queue for data packets.
 \subsubsection*{Solution}
+Let $\lambda_1= 0.3$, $\lambda_2=0.1$, $\mu_1=1$, and $\mu_2=4$.
+\begin{align*}
+  \rho_1 &=\frac{\lambda_1}{\mu_1}=\frac{0.3}{1} = 0.3 \\
+  \rho_2 &=\frac{\lambda_2}{\mu_2}=\frac{0.1}{4} = 0.025 \\
+  \rho &=\rho_1+\rho_2=0.325\\
+  \frac{\rho_1}{\mu_1}+\frac{\rho_2}{\mu_2}&= \frac{0.3}{1}+\frac{0.025}{4}
+                                             =\frac{49}{160}=0.30625\\
+  L_q^{(1)}&=\frac{\lambda_1(\rho_1/\mu_1+\rho_2/\mu_2)}{1-\rho_1}
+             =\frac{0.3(0.30625)}{(1-0.3)} = \frac{21}{160}=0.13125\text{ voice packets}\\
+  L_q^{(2)}&=\frac{\lambda_2(\rho_1/\mu_1+\rho_2/\mu_2)}{(1-\rho_1)(1-\rho)}
+             =\frac{0.1(0.30625)}{(1-0.3)(1-0.325)}
+             = \frac{7}{108}\approx 0.06481\text{ data packets}\\
+  W_q^{(1)}&= \frac{L_q^{(1)}}{\lambda_1}=\frac{7}{16}= 0.4345\text{ ms}\\
+  W_q^{(2)}&= \frac{L_q^{(2)}}{\lambda_2}=\frac{35}{54}= 0.6481\text{ ms}
+\end{align*}
+
 \subsection*{b}
 Now assume that service times are deterministic with the same average
 values as given previously. Find the average delay in queue for each type
 of packet under the same priority scheme.
 \subsubsection*{Solution}
+\begin{align*}
+  \lambda &= \lambda_1+\lambda_2=0.4 \\
+  \text{E}[S^2]&=\text{Var}[S]+\text{E}[S]^2 = 0 + (1^2\cdot (0.3/0.4)+4^2\cdot (0.1/0.4))
+  = \frac{19}{4} = 4.75\\
+  W_q^{1}&=\frac{\lambda\text{E}[S^2]/2}{1-\sigma_1}
+           = \frac{0.4(19/4)/2}{1-0.3}=\frac{19}{14}\approx 1.3571428\text{ ms}\\
+  W_q^{2}&=\frac{\lambda\text{E}[S^2]/2}{(1-\sigma_1)(1-\sigma_2)}
+  = \frac{0.4(19/4)/2}{(1-0.3)(1-0.325)}=\frac{380}{189}\approx 2.010582\text{ ms}\\
+\end{align*}
+
 \subsection*{c}
 If packets are served FCFS, determine the average delay in queue for an
 arbitrary packet (with deterministic service times).
 \subsubsection*{Solution}
+\begin{align*}
+  W_q&=\frac{\lambda\text{E}[S^2]/2}{1-\rho}
+           = \frac{0.4(19/4)/2}{1-0.325}=\frac{38}{27}\approx 1.407\text{ ms}\\
+\end{align*}
 
 \section{} %3
 Consider an M/G/1 queue with $\lambda = 2$ per minute. The service distribution has a
@@ -95,6 +141,26 @@ mean of 0.25 minutes. For the service distribution, a standard deviation of 1/M
 delay is \$3 per minute of delay in queue per customer. What is the standard
 deviation of service time that minimizes cost?
 \subsubsection*{Solution}
+Let $\rho = \frac{\lambda}{\mu}=2\cdot 0.25=0.5$.
+\begin{align*}
+  W_q&=\frac{\lambda\text{E}[S^2]/2}{1-\rho} \\
+  \text{E}[S^2]&=\text{Var}[S]+\text{E}[S]^2 = \frac{1}{M^2} + (0.25)^2 \\
+  W_q&=\left[\frac{1}{M^2} + (0.25)^2\right]\frac{2/2}{1-0.5} = 0.125 + 2/M^2\\
+\end{align*}
+Then the cost $C$ is
+\begin{align*}
+  C &= M + 3W_q= M + 0.375 + 6/M^2
+\end{align*}
+So $C$ is minimized when
+\begin{align*}
+  \frac{dC}{dM} &= 1 - \frac{12}{M^3}=0\\
+  M&=12^{\frac{1}{3}} \approx 2.2896
+\end{align*}
+And the standard deviation of service time $\sigma$ that minimizes cost is
+\begin{align*}
+\sigma=1/M\approx 0.4368
+\end{align*}
+
 
 \section{Problem 6.21} %4
 Customers arrive at an ATM machine according to a Poisson process with
