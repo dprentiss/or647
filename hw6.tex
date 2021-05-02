@@ -29,19 +29,36 @@ What is the average wait in queue for non-priority customers?
 \begin{align*}
   \mu &= 60/4=15\text{ per hour}\\
   \rho &=  \frac{\lambda_1+\lambda_2}{\mu} = \frac{13}{15}\\
-  L_q^{(2)}&=\frac{\lambda_2\rho}{(\mu-\lambda_1)(1-\rho)}=\frac{8(13/15)}{(15-5)(1-(13/15))}
-             = 5.2 \\
-  W_q^{(2)}=
+  L_q^{(2)} &=\frac{\lambda_2\rho}{(\mu-\lambda_1)(1-\rho)}=\frac{8(13/15)}{(15-5)(1-(13/15))}
+             = \frac{26}{5} = 5.2 \\
+  W_q^{(2)} &= \frac{L_q^{(2)}}{\lambda_2} = \frac{5.2}{8} = 0.650\text{ hr} =
+              39\text{ min}
 \end{align*}
 
 \subsection*{b}
 Priority customers pay \$360 for a ticket. Non-priority customers pay \$300 for a ticket. Suppose that a given customer’s value of time is \$100 per hour. (This means that one hour of time spent at the counter effectively costs this customer \$100.) Should this one customer pay for the priority service? Assume all other customers remain the same.
 \subsubsection*{Solution}
 
+\begin{align*}
+  L_q^{(1)} &=\frac{\lambda_1\rho}{(\mu-\lambda_2)(1-\rho)}=\frac{5(13/15)}{(15-8)(1-(13/15))}
+             = \frac{65}{14} \approx 4.643 \\
+  W_q^{(1)} &= \frac{L_q^{(1)}}{\lambda_1} = \frac{65}{14}\cdot\frac{1}{5}
+              = \frac{13}{14} \approx 0.929\text{ hr}
+              \approx 55.714\text{ min}
+\end{align*}
+Let the total cost to the customer for priority and non-priority service be called
+$C_1$ and $C_2$, respectively. Then
+\begin{align*}
+  C_1 &= 360 + 100W_q^{(2)}= 360 + 100(0.650) = \$425 \\
+  C_2 &= 300 + 100W_q^{(1)}= 300 + 100\cdot\frac{13}{14} = \$392.86
+\end{align*}
+So, given the customer's value of money, she should choose non-priority service.
+
 \subsection*{c}
 Repeat part (a) under the assumption that the service distribution is
 Erlang-2 with a mean of 4 minutes.
 \subsubsection*{Solution}
+
 
 \subsection*{d}
 Now suppose that \emph{every} customer decides to pay for priority service. What
