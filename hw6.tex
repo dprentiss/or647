@@ -170,15 +170,42 @@ rate $\lambda= 60$/h. The following transaction times are observed (in seconds):
 Would an $M/M/1$ queue be an appropriate model for this system (why
 or why not)?
 \subsubsection*{Solution}
+No. Quantile-quantile plots of the sample data suggests that the service times are
+not exponentially or geometrically distributed.
+Therefore they do not exhibit the memoryless property.
+So, we should rather use a $M/G/1$ model.
 \subsection*{b}
 Estimate the average number of people waiting in line at the ATM
 \subsubsection*{Solution}
+Let $\mu= \frac{748}{15}\approx 49.867$ and $\sigma^2 = 402.116$ be the sample mean and variance respectively.
+\begin{align*}
+  \rho &= \frac{\lambda}{\mu} = \frac{1/60}{1/49.867} \approx 0.831\\
+  \text{E}[S]^2 &= \mu^2 \approx 2486.684 \\
+  \text{Var}[S] &= 402.116 \\
+  \text{E}[S^2] &= \text{Var}[S] + \text{E}[S]^2
+                  = 402.116 + 2486.684 \approx 2888.800\\
+  W_q&=\frac{\lambda\text{E}[S^2]/2}{1-\rho}
+       = \frac{(1/60)(2888.800)(1/2)}{1-0.831}
+       \approx 142.446\text{ s}
+       \approx 2.374\text{ min} \\
+  L_q&=\lambda W_q = (60/60) \cdot 2.374 = 2.374\\
+\end{align*}
+
 \subsection*{c}
 The bank wishes to keep the average line length (number in queue) less
 than or equal to one. What is the average transaction time needed to
 achieve this goal (assuming that the variance of the transaction times is
 held constant)?
 \subsubsection*{Solution}
+We need $\mu^*$ such that
+\begin{align*}
+  L_q = W_q&=\frac{\lambda[(\mu^*)^2+402.116]/2}{1-0.831} = 142.446 \\
+  \mu^* \leq 28.5427
+\end{align*}
+So
+\begin{align*}
+  \mu^* \leq 28.5427\text{ s}
+\end{align*}
 
 \section{} %5
 Customers arrive at a single-server queue according to a Poisson process with rate
@@ -186,14 +213,44 @@ Customers arrive at a single-server queue according to a Poisson process with ra
 advanced service. The time to complete basic service is exponential with a mean
 of 3 minutes. The time to complete advanced service is exponential with a mean
 of 10 minutes.
+
 \subsection*{a}
 Model this as an $M/G/1$ queue. Determine $L_q$ and $W$ for this system
 \subsubsection*{Solution}
+Let $\lambda = 10/60 = 1/6$ per minute,
+$\lambda_1=0.7\cdot\frac{1}{6}=\frac{7}{60}$,
+$\lambda_2=0.3\cdot\frac{1}{6}=\frac{3}{60}$,
+$\mu_1=1/3$,
+and $\mu_2=1/10$.
+\begin{align*}
+  \rho &= \rho_1 + \rho_2
+         = \frac{\lambda_1}{\mu_1}
+         + \frac{\lambda_2}{\mu_2}
+         = \frac{7}{60}\cdot 3
+         + \frac{3}{60}\cdot 10
+         = \frac{7}{20} = 0.85 \\
+  \text{E}[S]^2 &= 0.7\cdot 3 + 0.3\cdot 10 = \frac{51}{10} = 5.1 \\
+  \text{Var}[S] &= 0.7\cdot 3^2 + 0.3\cdot 10^2 = \frac{363}{10} = 36.3 \\
+  \text{E}[S^2] &= \text{Var}[S] + \text{E}[S]^2 = \frac{363}{10} + \frac{51}{10} = \frac{207}{5} = 41.4\\
+  W_q&=\frac{\lambda\text{E}[S^2]/2}{1-\rho}
+  = \frac{(1/6)(41.4)(1/2)}{1-0.85} = 23 \\
+  L_q&=\lambda W_q = \frac{1}{6}\cdot 23 = \frac{23}{6} \approx 3.833 \\
+  L &= L_q + \rho = \frac{23}{6} + \frac{7}{20} = \frac{251}{60} \approx 4.183
+\end{align*}
+
 \subsection*{b}
 What is $L_q$ if the advanced service time can be changed from an
 exponential random variable to a deterministic random variable with the
 same mean of 10 minutes?
 \subsubsection*{Solution}
+With $\rho$ and $\text{E}[S]^2$ as before,
+\begin{align*}
+  \text{Var}[S] &= 0.7\cdot 3^2 + 0.3\cdot 0 = \frac{63}{10} = 36.3 \\
+  \text{E}[S^2] &= \text{Var}[S] + \text{E}[S]^2 = \frac{63}{10} + \frac{51}{10} = \frac{57}{5} = 11.4\\
+  W_q&=\frac{\lambda\text{E}[S^2]/2}{1-\rho}
+  = \frac{(1/6)(11.4)(1/2)}{1-0.85} = \frac{19}{3}\approx 6.333 \\
+  L_q&=\lambda W_q = \frac{1}{6}\cdot \frac{19}{3} = \frac{19}{18} \approx 1.056 \\
+\end{align*}
 
 \end{document}
 
